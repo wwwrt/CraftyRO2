@@ -1,9 +1,9 @@
 <template>
   <div>
     <header>
-      <Navbar />
-      <RouterView />
+      <Navbar v-if="showNavbar" />
     </header>
+    <router-view/>
     <Footer />
   </div>
 </template>
@@ -14,6 +14,25 @@ import Navbar from './components/navbar.vue'
 import Footer from './components/footer.vue'
 </script>
 
+<script>
+export default {
+  computed: {
+    showNavbar() {
+      // definește rutele pe care navbar-ul nu ar trebui să fie afișat
+      const hiddenRoutes = ['signup', 'login'];
+      // verifică dacă $route și $route.name sunt definite
+      if (this.$route && this.$route.name) {
+        // aplică toLowerCase() doar dacă $route.name este definit, apoi verifică dacă se află în lista de rute ascunse
+        return !hiddenRoutes.includes(this.$route.name.toLowerCase());
+      }
+      // dacă $route sau $route.name nu sunt definite, presupunem că navbar-ul trebuie afișat
+      return true;
+    }
+  }
+};
+</script>
+
+
 <style scoped>
 #app {
   display: flex;
@@ -23,6 +42,5 @@ import Footer from './components/footer.vue'
 
 .content {
   flex: 1;
-  /* footer-ul rămâne în partea de jos a paginii */
 }
 </style>
