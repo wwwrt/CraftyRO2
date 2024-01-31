@@ -5,8 +5,14 @@
             <Card v-for="product in visibleProducts" :key="product.id" :product="product" />
         </div>
     </div>
-    <button v-if="!allProductsShown" @click="loadMore">See More</button>
-    <p v-else>Acestea sunt toate produsele</p>
+    <button
+  v-if="!allProductsShown"
+  @click="loadMore"
+  class="mx-auto mt-5 mb-5 block text-3xl text-[#7f5539] hover:bg-[#d4a373] hover:text-[#faedcd] rounded p-2 font-bold"
+>
+  See More
+</button>
+<p class="mt-5 mb-5 block text-center text-3xl text-[#7f5539] p-2 font-bold" v-else>Acestea sunt toate produsele</p>
 </template>
 
 <script setup>
