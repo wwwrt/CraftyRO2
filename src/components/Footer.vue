@@ -1,11 +1,3 @@
-<script>
-
-</script>
-
-<style>
-
-</style>
-
 <template>
     <footer class="bg-black bg-opacity-50">
         <div class="mx-auto w-full max-w-screen">
