@@ -1,7 +1,9 @@
 <template>
     <Carousel2 />
-    <div class="grid grid-cols-3 gap-4">
-        <Card v-for="product in visibleProducts" :key="product.id" :product="product" />
+    <div class="flex-container">
+        <div class="grid-container">
+            <Card v-for="product in visibleProducts" :key="product.id" :product="product" />
+        </div>
     </div>
     <button v-if="!allProductsShown" @click="loadMore">See More</button>
     <p v-else>Acestea sunt toate produsele</p>
@@ -36,5 +38,45 @@ onMounted(async () => {
 </script>
 
 <style>
+.flex-container {
+    display: flex;
+    justify-content: center; /* Centrarea pe orizontală */
+}
+
+.grid-container {
+    display: grid;
+    grid-gap: 16px;
+    /* Restul stilurilor pentru grid */
+}
+
+/* Ecrane mari - 5 carduri pe rând */
+@media (min-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Ecrane medii - 4 carduri pe rând */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Ecrane mici - 3 carduri pe rând */
+@media (min-width: 768px) and (max-width: 991px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tel - 1 carduri pe rând */
+@media (min-width: 576px) and (max-width: 767px) {
+    .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
 
 </style>
+
