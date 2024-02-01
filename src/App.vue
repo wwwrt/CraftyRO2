@@ -1,37 +1,32 @@
+<!-- App.vue -->
 <template>
   <div>
     <header>
-      <Navbar v-if="showNavbar" />
+      <Navbar :selectedTab="selectedTab" @selectedTab="updateSelectedTab" />
     </header>
-    <router-view/>
+    <router-view />
     <Footer />
   </div>
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import Navbar from './components/navbar.vue'
-import Footer from './components/footer.vue'
-</script>
+import { ref } from 'vue';
+import Navbar from './components/navbar.vue';
+import Footer from './components/Footer.vue';
 
-<script>
-export default {
-  computed: {
-    showNavbar() {
-      // definește rutele pe care navbar-ul nu ar trebui să fie afișat
-      const hiddenRoutes = ['signup', 'login'];
-      // verifică dacă $route și $route.name sunt definite
-      if (this.$route && this.$route.name) {
-        // aplică toLowerCase() doar dacă $route.name este definit, apoi verifică dacă se află în lista de rute ascunse
-        return !hiddenRoutes.includes(this.$route.name.toLowerCase());
-      }
-      // dacă $route sau $route.name nu sunt definite, presupunem că navbar-ul trebuie afișat
-      return true;
-    }
-  }
-};
-</script>
+const selectedTab = ref('home');
 
+function updateSelectedTab(tab) {
+  selectedTab.value = tab;
+}
+
+const hiddenRoutes = ['signup', 'login'];
+
+function showNavbar(routeName) {
+  // Verificăm dacă routeName este definit și nu este null/undefined înainte de a apela toLowerCase()
+  return routeName && !hiddenRoutes.includes(routeName.toLowerCase());
+}
+</script>
 
 <style scoped>
 #app {
